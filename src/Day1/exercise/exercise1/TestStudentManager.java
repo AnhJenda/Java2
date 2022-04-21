@@ -2,7 +2,6 @@ package Day1.exercise.exercise1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
 
 /*
     @author: Dinh Quang Anh
@@ -29,12 +28,18 @@ public class TestStudentManager {
         System.out.println("list" + students);
 
         // find
-        students.forEach(student -> {
-            if (student.getFullName() == "Dinh Quang Anh") {
+//        students.forEach(student -> {
+//            if (student.getFullName() == "Dinh Quang Anh") {
+//                System.out.println("Dinh Quang Anh is exist in the student array");
+//                System.out.println("index of \"Dinh Quang Anh\": " +students.indexOf(student));
+//            }
+//        });
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getFullName().contains("Dinh Quang Anh")){
                 System.out.println("Dinh Quang Anh is exist in the student array");
-                System.out.println("index of \"Dinh Quang Anh\": " +students.indexOf(student));
+                System.out.println("index of \"Dinh Quang Anh\": " + i);
             }
-        });
+        }
 
         // remove
         students.remove(2);
