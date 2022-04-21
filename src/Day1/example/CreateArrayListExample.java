@@ -1,4 +1,4 @@
-package Day1;
+package Day1.example;
 /*
     @author: Dinh Quang Anh
     Date   : 4/21/2022
