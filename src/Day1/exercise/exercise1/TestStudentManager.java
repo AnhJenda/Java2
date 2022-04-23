@@ -2,6 +2,8 @@ package Day1.exercise.exercise1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 /*
     @author: Dinh Quang Anh
@@ -32,15 +34,21 @@ public class TestStudentManager {
 //            if (student.getFullName() == "Dinh Quang Anh") {
 //                System.out.println("Dinh Quang Anh is exist in the student array");
 //                System.out.println("index of \"Dinh Quang Anh\": " +students.indexOf(student));
+//            }else {
+//                System.out.println("can not find \"Dinh Quang Anh\"");
 //            }
 //        });
         for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getFullName().contains("Dinh Quang Anh")){
                 System.out.println("Dinh Quang Anh is exist in the student array");
                 System.out.println("index of \"Dinh Quang Anh\": " + i);
+            }else {
+                System.out.println("can not find \"Dinh Quang Anh\"");
             }
         }
-
+        // sort by name
+        Collections.sort(students, Comparator.comparing(Student::getFullName));
+        System.out.println(students);
         // remove
         students.remove(2);
         System.out.println(students);
