@@ -1,10 +1,8 @@
 package Day1.exercise.exercise1;
 
-import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.List;
-import java.util.Collections;
-import java.util.Comparator;
-
+import java.util.ArrayList;
 /*
     @author: Dinh Quang Anh
     Date   : 4/21/2022
@@ -12,45 +10,37 @@ import java.util.Comparator;
 */
 public class TestStudentManager {
     public static void main(String[] args) {
-
-        List<Student> students = new ArrayList<>();
-        // add()
-        students.add(new Student("Dinh Quang Anh", 1, "Ninh Binh", "11/07/1999",
-                "quanganh@nowhere.com", "Dang hoc"));
-        students.add(new Student("Dinh Quang Em", 2, "Ha Noi", "12/08/2000",
-                "quangem@nowhere.com", "Chua hoc"));
-        students.add(new Student("Dinh Quang Chi", 3, "Ninh Binh", "13/09/2001",
-                "quangchi@nowhere.com", "Hoc xong"));
-
-        System.out.println("list: " + students);
-
-        // set()
-        students.set(2,new Student("Dinh Quang Em 2", 3, "Ninh Binh", "14/10/2002",
-                        "quangem2@nowhere.com", "Hoc xong"));
-        System.out.println("list" + students);
-
-        // find
-//        students.forEach(student -> {
-//            if (student.getFullName() == "Dinh Quang Anh") {
-//                System.out.println("Dinh Quang Anh is exist in the student array");
-//                System.out.println("index of \"Dinh Quang Anh\": " +students.indexOf(student));
-//            }else {
-//                System.out.println("can not find \"Dinh Quang Anh\"");
-//            }
-//        });
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getFullName().contains("Dinh Quang Anh")){
-                System.out.println("Dinh Quang Anh is exist in the student array");
-                System.out.println("index of \"Dinh Quang Anh\": " + i);
-            }else {
-                System.out.println("can not find \"Dinh Quang Anh\"");
+        List<Student> studentList = new ArrayList<>();
+        Managerment managerment = new Managerment();
+        Student s1 = new Student("Dinh Quang Anh", 1, "Ninh Binh", "11/07/1999", "quanganh.nowhere@gmail.com", "1");
+        Student s2 = new Student("Dinh Quang Em", 2, "Ninh Binh", "11/07/1999", "quanganh.nowhere@gmail.com", "1");
+        Student s3 = new Student("Dinh Quang Chi", 3, "Ninh Binh", "11/07/1999", "quanganh.nowhere@gmail.com", "1");
+        Scanner input = new Scanner(System.in);
+        managerment.objAddStudent(s1);
+        managerment.objAddStudent(s2);
+        managerment.objAddStudent(s3);
+        int choice;
+        do {
+            System.out.println("1.Them sinh vien");
+            System.out.println("2.Xoa sinh vien");
+            System.out.println("3.Sua thong tin sinh vien");
+            System.out.println("4.Sap xep theo thu tu A->Z");
+            System.out.println("5.In ra danh sach sinh vien");
+            System.out.println("6.Thoat");
+            System.out.println("Nhap lua chon: ");
+            choice = input.nextInt();
+            switch (choice){
+                case 1: managerment.addStudent();
+                    break;
+                case 2: managerment.removeStudent();
+                    break;
+                case 3: managerment.setStudent();
+                    break;
+                case 4: managerment.sortStudent();
+                    break;
+                case 5: managerment.getStudentList();
+                    break;
             }
-        }
-        // sort by name
-        Collections.sort(students, Comparator.comparing(Student::getFullName));
-        System.out.println(students);
-        // remove
-        students.remove(2);
-        System.out.println(students);
+        }while (choice<6 && choice > 0);
     }
 }

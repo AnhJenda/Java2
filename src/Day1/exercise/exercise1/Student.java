@@ -1,13 +1,10 @@
 package Day1.exercise.exercise1;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Date;
 /*
     @author: Dinh Quang Anh
     Date   : 4/21/2022
     Project: Java2
 */
-class Student {
+    public class Student {
     private String fullName;
     private int rollNo;
     private String address;
