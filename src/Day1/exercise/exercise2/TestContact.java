@@ -15,11 +15,11 @@ public class TestContact {
         contactList.addContact(contact1);
         contactList.addContact(contact2);
 
-        contactList.getListContact();
-        contactList.searchContact("Em");
-        contactList.removeContact(contact1);
-        contactList.getListContact();
-        contactList.updateContact(contact1, contact3);
+//        contactList.getListContact();
+//        contactList.searchContact("Em");
+//        contactList.removeContact(contact1);
+//        contactList.getListContact();
+        contactList.updateContact(contact2, contact3);
         contactList.getListContact();
     }
 }
