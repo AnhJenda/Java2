@@ -87,17 +87,17 @@ public class Managerment {
                 System.out.printf("Khong ton tai sinh vien co ma so %d \n", rollNo);
             } else {
                 System.out.println("Moi ban nhap ten sinh vien : ");
-                fullName = input.next();
+                fullName = input.nextLine();
                 System.out.println("Moi ban nhap ma sinh vien : ");
                 rollNo = input.nextInt();
                 System.out.println("Moi ban nhap dia chi:");
-                address = input.next();
+                address = input.nextLine();
                 System.out.println("Moi ban nhap ngay sinh (dd/mm/yyyy)");
-                DoB = input.next();
+                DoB = input.nextLine();
                 System.out.println("Moi ban nhap email:");
-                email = input.next();
+                email = input.nextLine();
                 System.out.println("Moi ban nhap trang thai hoc tap(1-dang hoc; 2-hoc xong; 3-nghi hoc):");
-                status = input.next();
+                status = input.nextLine();
                 student.setFullName(fullName);
                 student.setAddress(address);
                 student.setDoB(DoB);

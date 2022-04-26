@@ -2,7 +2,7 @@ package Day1.exercise.exercise2;
 
 /*
     @author: Dinh Quang Anh
-    Date   : 4/26/2022
+    Date   : 4/25/2022
     Project: Java2
 */
 public class Contact {
