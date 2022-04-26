@@ -36,7 +36,8 @@ public class Managerment {
 
         if(studentList.stream().allMatch(student -> student.getRollNo() != (rollNo))){
             System.out.println("Nhap fullName");
-            fullName = input.next();
+            input.nextLine();
+            fullName = input.nextLine();
             System.out.println("Nhap address");
             address = input.nextLine();
             System.out.println("Nhap email");
@@ -87,16 +88,22 @@ public class Managerment {
                 System.out.printf("Khong ton tai sinh vien co ma so %d \n", rollNo);
             } else {
                 System.out.println("Moi ban nhap ten sinh vien : ");
+                input.nextLine();
                 fullName = input.nextLine();
                 System.out.println("Moi ban nhap ma sinh vien : ");
+                input.nextLine();
                 rollNo = input.nextInt();
                 System.out.println("Moi ban nhap dia chi:");
+                input.nextLine();
                 address = input.nextLine();
                 System.out.println("Moi ban nhap ngay sinh (dd/mm/yyyy)");
+                input.nextLine();
                 DoB = input.nextLine();
                 System.out.println("Moi ban nhap email:");
+                input.nextLine();
                 email = input.nextLine();
-                System.out.println("Moi ban nhap trang thai hoc tap(1-dang hoc; 2-hoc xong; 3-nghi hoc):");
+                System.out.println("Moi ban nhap trang thai hoc tap:");
+                input.nextLine();
                 status = input.nextLine();
                 student.setFullName(fullName);
                 student.setAddress(address);

@@ -10,11 +10,16 @@ public class TestContact {
         ContactList contactList = new ContactList();
         Contact contact1 = new Contact("Dinh Quang Anh","0395100761");
         Contact contact2 = new Contact("Dinh Em Quang","0123456789");
+        Contact contact3 = new Contact("Dinh Chi Quang","9876543210");
 
         contactList.addContact(contact1);
         contactList.addContact(contact2);
 
-
+        contactList.getListContact();
         contactList.searchContact("Em");
+        contactList.removeContact(contact1);
+        contactList.getListContact();
+        contactList.updateContact(contact1, contact3);
+        contactList.getListContact();
     }
 }
