@@ -37,15 +37,14 @@ public class Managerment {
         if(studentList.stream().allMatch(student -> student.getRollNo() != (rollNo))){
             System.out.println("Nhap fullName");
             fullName = input.next();
-            System.out.println(fullName);
             System.out.println("Nhap address");
-            address = input.next();
+            address = input.nextLine();
             System.out.println("Nhap email");
-            email = input.next();
+            email = input.nextLine();
             System.out.println("Nhap ngay sinh");
-            DoB = input.next();
+            DoB = input.nextLine();
             System.out.println("Nhap status");
-            status = input.next();
+            status = input.nextLine();
             Student stu = new Student(fullName, rollNo, address, DoB, email, status);
             studentList.add(stu);
             System.out.println("Thêm sinh viên thành công");
