@@ -15,117 +15,40 @@ public class DemoInsertUpdateDeleteMySQL {
                         "root", "");
                 Statement stmt = conn.createStatement();
                 ){
-            // Đầu tiên in ra bảng category ban đầu
-            String strSelect = "select * from category";
-            System.out.println("The SQL statement is: " + strSelect + "\n");
-            ResultSet rset = stmt.executeQuery(strSelect);
-            System.out.println("The records selected are:");
-            int rowCount = 0;
-            while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                int catID = rset.getInt("catID");
-                String catName = rset.getString("catName");
-                System.out.println(catID + "," + catName);
-                ++rowCount;
-            }
-
             // Demo Insert
-            System.out.println("Demo Insert multiple record");
-            String stmInsert = "insert into category values" + "('4', 'Loai 4')" + "('5', 'Loai 5')";
-            System.out.println("The SQL statement is: " + stmInsert + "\n");
-            int countInserted = stmt.executeUpdate(stmInsert);
-            System.out.println(countInserted + " records inserted.\n");
-            // In ra bảng category sau khi nhập thêm 2 dòng
-            strSelect = "select * from category";
-            System.out.println("The SQL statement is: " + strSelect + "\n");
-            rset = stmt.executeQuery(strSelect);
-            System.out.println("The records selected are:");
-            rowCount = 0;
-            while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                int catID = rset.getInt("catID");
-                String catName = rset.getString("catName");
-                System.out.println(catID + "," + catName);
-                ++rowCount;
-            }
-
-            // Đầu tiên in ra bảng book ban đầu
-            strSelect = "select bookID, bookName, author from book";
-            System.out.println("The SQL statement is: " + strSelect + "\n");
-            rset = stmt.executeQuery(strSelect);
-            System.out.println("The records selected are:");
-            rowCount = 0;
-            while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                int catID = rset.getInt("catID");
-                String catName = rset.getString("catName");
-                System.out.println(catID + "," + catName);
-                ++rowCount;
-            }
-            System.out.println("Total number of records = " + rowCount);
-            // Demo Insert partial record
-            System.out.println("Demo Insert partial record");
-            stmInsert = "insert into books (bookID, bookName, author) values ('4', 'Sach 4', 'Tac gia 4')";
-            countInserted = stmt.executeUpdate(stmInsert);
-            System.out.println(countInserted + " records inserted.\n");
-            // in ra bảng book sau khi thêm một dòng nữa
-            strSelect = "select bookID, bookName, author from book";
-            System.out.println("The SQL statement is: " + strSelect + "\n");
-            rset = stmt.executeQuery(strSelect);
-            System.out.println("The records selected are:");
-            rowCount = 0;
-            while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                int catID = rset.getInt("catID");
-                String catName = rset.getString("catName");
-                System.out.println(catID + "," + catName);
-                ++rowCount;
-            }
-            System.out.println("Total number of records = " + rowCount);
-
+            System.out.println("Demo Insert nhieu ban ghi");
+            String stmMultipleInsert = "insert into category values" + "('6', 'Loai 6')," + "('7', 'Loai 7')";
+            System.out.println("The SQL statement is: " + stmMultipleInsert + "\n");
+            int countMultipleInserted = stmt.executeUpdate(stmMultipleInsert);
+            System.out.println(countMultipleInserted + " records inserted.\n");
+            // Demo Insert 1 phan cua ban ghi
+            System.out.println("Demo Insert 1 phan cua ban ghi");
+            String stmParticalInsert = "insert into book(bookID, bookName, author) values ('1', 'Sach 1', 'Tac gia 1')";
+            int countParticalInserted = stmt.executeUpdate(stmParticalInsert);
+            System.out.println(countParticalInserted + " records inserted.\n");
             // Demo Scanner Insert
             System.out.println("Demo Scanner Insert");
             Scanner in = new Scanner(System.in);
             System.out.println("Nhap bookId");
-            int id = in.nextInt();
+            Integer id = in.nextInt();
             in.nextLine();
             System.out.println("Nhap bookName");
             String bookName = in.nextLine();
             System.out.println("Nhap author");
             String author = in.nextLine();
-            stmInsert = "insert  into books(bookID,bookName,author) values ('" + id + "','" + bookName +"','" + author + "')";
-            countInserted =  stmt.executeUpdate(stmInsert);
-            System.out.println(countInserted + " records inserted.\n");
+            String stmScannerInsert = "insert  into book(bookID,bookName,author) values ('" + id + "','" + bookName +"','" + author + "')";
+            int countScannerInserted =  stmt.executeUpdate(stmScannerInsert);
+            System.out.println(countScannerInserted + " records inserted.\n");
 
             // Demo Delete
-            String stmDelete = "delete from category where catID = 1";
+            String stmDelete = "delete from category where catID = 4";
             int countDeleted = stmt.executeUpdate(stmDelete);
-            System.out.println(countInserted + " records deleted.\n");
-            // select lại bảng category để check
-            strSelect = "select * from category";
-            System.out.println("The SQL statement is: " + strSelect + "\n");
-            rset = stmt.executeQuery(strSelect);
-            System.out.println("The records selected are:");
-            rowCount = 0;
-            while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                int catID = rset.getInt("catID");
-                String catName = rset.getString("catName");
-                System.out.println(catID + "," + catName);
-                ++rowCount;
-            }
+            System.out.println(countDeleted + " records deleted.\n");
 
             // Demo Update
-            String stmUpdate = "update category" + "set catID = 1" +  "where catID = 2";
+            String stmUpdate = "update category" + "set catID = 1" +  "where catID = 5";
             int countUpdated = stmt.executeUpdate(stmUpdate);
-            System.out.println(countInserted + " records updated.\n");
-            // In lại bảng category để check lại
-            strSelect = "select * from category";
-            System.out.println("The SQL statement is: " + strSelect + "\n");
-            rset = stmt.executeQuery(strSelect);
-            System.out.println("The records selected are:");
-            rowCount = 0;
-            while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                int catID = rset.getInt("catID");
-                String catName = rset.getString("catName");
-                System.out.println(catID + "," + catName);
-                ++rowCount;
-            }
+            System.out.println(countUpdated + " records updated.\n");
         }
         catch (SQLException e){
             e.printStackTrace();
