@@ -17,15 +17,15 @@ public class DemoInsertUpdateDeleteMySQL {
                 ){
             // Demo Insert
             System.out.println("Demo Insert nhieu ban ghi");
-            String stmMultipleInsert = "insert into category values" + "('6', 'Loai 6')," + "('7', 'Loai 7')";
+            String stmMultipleInsert = "insert into category values" + "('10', 'Loai 10')," + "('11', 'Loai 11')";
             System.out.println("The SQL statement is: " + stmMultipleInsert + "\n");
-            int countMultipleInserted = stmt.executeUpdate(stmMultipleInsert);
-            System.out.println(countMultipleInserted + " records inserted.\n");
+            int countMultipleInsert = stmt.executeUpdate(stmMultipleInsert);
+            System.out.println(countMultipleInsert + " ban ghi da insert.\n");
             // Demo Insert 1 phan cua ban ghi
             System.out.println("Demo Insert 1 phan cua ban ghi");
             String stmParticalInsert = "insert into book(bookID, bookName, author) values ('1', 'Sach 1', 'Tac gia 1')";
             int countParticalInserted = stmt.executeUpdate(stmParticalInsert);
-            System.out.println(countParticalInserted + " records inserted.\n");
+            System.out.println(countParticalInserted + " ban ghi da insert.\n");
             // Demo Scanner Insert
             System.out.println("Demo Scanner Insert");
             Scanner in = new Scanner(System.in);
@@ -38,7 +38,7 @@ public class DemoInsertUpdateDeleteMySQL {
             String author = in.nextLine();
             String stmScannerInsert = "insert  into book(bookID,bookName,author) values ('" + id + "','" + bookName +"','" + author + "')";
             int countScannerInserted =  stmt.executeUpdate(stmScannerInsert);
-            System.out.println(countScannerInserted + " records inserted.\n");
+            System.out.println(countScannerInserted + " ban ghi da insert.\n");
 
             // Demo Delete
             String stmDelete = "delete from category where catID = 4";
