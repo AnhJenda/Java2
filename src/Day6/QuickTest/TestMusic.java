@@ -1,5 +1,6 @@
 package Day6.QuickTest;
 
+import java.security.spec.RSAOtherPrimeInfo;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -12,85 +13,105 @@ public class TestMusic {
     public static void main(String[] args) {
         try(
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music", "root", "");
-                Statement stmt = conn.createStatement();
                 ){
-            // Insert dữ liệu
-            Integer songID;
-            String songName;
-            String author;
-            Integer releaseYear;
-            System.out.println("Enter 1 to insert!\n Enter 2 to update! \n Enter 3 to dalete! \n Enter 4 to search!");
-            Scanner inp = new Scanner(System.in);
-            int choice = inp.nextInt();
+            System.out.println(" Enter 1 de insert!\n Enter 2 de update!\n Enter 3 de delete!\n Enter 4 de Search! \n");
+            Scanner inputChoice = new Scanner(System.in);
+            int choice = inputChoice.nextInt();
+
             switch (choice) {
-                case 1 : // insert du lieu
-                    System.out.println("ban da chon insert du lieu!");
-                    Scanner inInsert = new Scanner(System.in);
-                    System.out.println("Nhap songID: ");
-                    songID = inInsert.nextInt();
-                    inInsert.nextLine();
-                    System.out.println("Nhap songName: ");
-                    songName = inInsert.next();
-                    inInsert.nextLine();
-                    System.out.println("Nhap author name: ");
-                    author = inInsert.next();
-                    inInsert.nextLine();
-                    System.out.println("Nhap release year: ");
-                    releaseYear = inInsert.nextInt();
-                    String stmInsert = "insert into music values " + "(" + songID + "," + songName + "," + author + "," + releaseYear + ")";
-                    int countInsert = stmt.executeUpdate(stmInsert);
-                    System.out.println(countInsert + " records inserted.");
+                case 1: // insert
+                    System.out.println("Ban da chon muc insert!");
+                    Scanner inputInsert = new Scanner(System.in);
+                    System.out.println("Nhap ID bai hat: ");
+                    Integer insertSongID = inputInsert.nextInt();
+                    inputInsert.nextLine();
+                    System.out.println("Nhap ten bai hat: ");
+                    String insertSong = inputInsert.next();
+                    inputInsert.nextLine();
+                    System.out.println("Nhap ten tac gia: ");
+                    String insertAuthor = inputInsert.next();
+                    inputInsert.nextLine();
+                    System.out.println("Nhap nam phat hanh: ");
+                    Integer insertReleaseYear = inputInsert.nextInt();
+
+                    String insertStm = "insert into music(songID, songName, author, releaseYear) values (?, ?, ?, ?)";
+                    PreparedStatement prpstmInsert = conn.prepareStatement(insertStm);
+
+                    prpstmInsert.setInt(1, insertSongID);
+                    prpstmInsert.setString(2, insertSong);
+                    prpstmInsert.setString(3, insertAuthor);
+                    prpstmInsert.setInt(4, insertReleaseYear);
+
+                    prpstmInsert.executeUpdate();
                     break;
-                case 2: // update du lieu
-                    System.out.println("Ban da chon update du lieu!");
-                    Scanner inUpdate = new Scanner(System.in);
+                case 2: // update
+                    System.out.println("Ban da lua chon muc update!");
                     System.out.println("Nhap ID bai hat ban muon update: ");
-                    int oldSongID = inUpdate.nextInt();
-                    inUpdate.nextLine();
-                    System.out.println("Nhap songID moi: ");
-                    songID = inUpdate.nextInt();
-                    inUpdate.nextLine();
-                    System.out.println("Nhap songName moi: ");
-                    songName = inUpdate.next();
-                    System.out.println("Nhap author name moi: ");
-                    author = inUpdate.next();
-                    System.out.println("Nhap release year moi: ");
-                    releaseYear = inUpdate.nextInt();
-                    String stmUpdate = "update music set" + "songID = " + songID + "," + "songName = " + songName + "," +
-                            "author = " + author + "," + "releaseYear = " + releaseYear + " where songID = "  + oldSongID;
-                    int countUpdate = stmt.executeUpdate(stmUpdate);
-                    System.out.println(countUpdate + "records updated");
+                    Scanner inputUpdate = new Scanner(System.in);
+                    Integer updateSongID = inputUpdate.nextInt();
+                    inputUpdate.nextLine();
+                    System.out.println("Nhap ID moi: ");
+                    Integer newSongID = inputUpdate.nextInt();
+                    inputUpdate.nextLine();
+                    System.out.println("Nhap ten moi: ");
+                    String newSongName = inputUpdate.next();
+                    inputUpdate.nextLine();
+                    System.out.println("Nhap ten tac gia moi: ");
+                    String newAuthor = inputUpdate.next();
+                    inputUpdate.nextLine();
+                    System.out.println("Nhap nam phat hanh moi: ");
+                    Integer newReleaseYear = inputUpdate.nextInt();
+
+                    String updateStm = "update music set songID = ?, songName = ?, author = ?, releaseYear = ? where songID = ?";
+                    PreparedStatement prpstmUpdate = conn.prepareStatement(updateStm);
+                    prpstmUpdate.setInt(1, newSongID);
+                    prpstmUpdate.setString(2, newSongName);
+                    prpstmUpdate.setString(3, newAuthor);
+                    prpstmUpdate.setInt(4, newReleaseYear);
+                    prpstmUpdate.setInt(5, updateSongID);
+                    prpstmUpdate.executeUpdate();
                     break;
-                case 3: // delete
-                    System.out.println("Ban da chon xoa du lieu!");
-                    Scanner inDelete = new Scanner(System.in);
-                    System.out.println("Nhap ID bai hat ban muon xoa: ");
-                    int deleteSongID = inDelete.nextInt();
-                    inDelete.nextLine();
-                    String stmDelete = "detele from music where songID = " + deleteSongID;
-                    int countDelete = stmt.executeUpdate(stmDelete);
-                    System.out.println(countDelete + "records deleted");
+                case 3: // delete theo ten bai hat
+                    System.out.println("Ban da chon muc delete!");
+                    Scanner inputDelete = new Scanner(System.in);
+                    System.out.println("Nhap ten bai hat ban muon xoa: ");
+                    String deleteSongName = inputDelete.next();
+
+                    String deleteStm = "delete * from music where songID = ?";
+                    PreparedStatement prpstmDelete = conn.prepareStatement(deleteStm);
+                    prpstmDelete.setString(1, deleteSongName);
+                    prpstmDelete.executeUpdate();
                     break;
-                case 4: // search theo songName
-                    System.out.println("Ban da chon search bai hat!");
-                    Scanner inSearch = new Scanner(System.in);
-                    System.out.println("Nhap ten bai hat ban muon tim: ");
-                    String searchName = inSearch.next();
-                    String stmSearch = "Select * from music where songName = " + searchName;
-                    ResultSet rset = stmt.executeQuery(stmSearch);
-                    System.out.println("The result are: \n");
-                    int rowCount = 0;
-                    while(rset.next()) {
-                        int searchSongID = rset.getInt("songID");
-                        String searchSongName = rset.getString("songName");
-                        String searchAuthor = rset.getString("author");
-                        int    searchReleaseYear   = rset.getInt("releaseYear");
-                        System.out.println(searchSongID + ", " + searchSongName + ", " + searchAuthor + "," + searchReleaseYear);
-                        ++rowCount;
+                case 4: // Search theo ten bai hat
+                    System.out.println("Ban da lua chon muc tim kiem!");
+                    Scanner inputSearch = new Scanner(System.in);
+                    System.out.println("Nhap ten bai hat ban muon tim");
+                    String searchSongName = inputSearch.next();
+
+                    String searchStm = "select * from music where songName like '%'?'%'";
+                    PreparedStatement prpstmSearch = conn.prepareStatement(searchStm);
+                    prpstmSearch.setString(1, searchSongName);
+                    ResultSet rset = prpstmSearch.executeQuery();
+                    ResultSetMetaData rsetMD = rset.getMetaData();
+                    int numColumns = rsetMD.getColumnCount();
+                    for (int i = 1; i <= numColumns; ++i) {
+                        System.out.printf("%-30s", rsetMD.getColumnName(i));
                     }
-                    System.out.println("Total number of records = " + rowCount);
+                    System.out.println();
+                    for (int i = 1; i <= numColumns; ++i) {
+                        System.out.printf("%-30s",
+                                "(" + rsetMD.getColumnClassName(i) + ")");
+                    }
+                    while (rset.next()) {
+                        for (int i = 1; i <= numColumns; ++i) {
+                            // getString() can be used for all column types
+                            System.out.printf("%-30s", rset.getString(i));
+                        }
+                        System.out.println();
+                    }
                     break;
             }
+
         }catch (SQLException e){
             e.printStackTrace();
         }

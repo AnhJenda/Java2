@@ -14,14 +14,39 @@ public class JdbcCommitCatchTest {
                 Statement stmt = conn.createStatement();
         ) {
             try {
-                // Disable auto-commit
                 conn.setAutoCommit(false);
 
-                // Issue two INSERT statements
-                stmt.executeUpdate("insert into books values (4001, 'Paul Chan', 'Mahjong 101', 4.4, 4)");
-                // Duplicate primary key, which triggers a SQLException
-                stmt.executeUpdate("insert into books values (4001, 'Peter Chan', 'Mahjong 102', 4.4, 4)");
-                conn.commit();     // Commit changes only if all statements succeed.
+// Before Changes
+                ResultSet rset = stmt.executeQuery("select id, qty from books where id in (1001, 1002)");
+                System.out.println("-- Before UPDATE --");
+                while(rset.next()) {
+                    System.out.println(rset.getInt("id") + ", " + rset.getInt("qty"));
+                }
+                conn.commit();     // Commit SELECT
+
+// Issue two UPDATE statements thru executeUpdate()
+                stmt.executeUpdate("update books set qty = qty + 1 where id = 1001");
+                stmt.executeUpdate("update books set qty = qty + 1 where id = 1002");
+                conn.commit();     // Commit UPDATEs
+
+                rset = stmt.executeQuery("select id, qty from books where id in (1001, 1002)");
+                System.out.println("-- After UPDATE and Commit --");
+                while(rset.next()) {
+                    System.out.println(rset.getInt("id") + ", " + rset.getInt("qty"));
+                }
+                conn.commit();     // Commit SELECT
+
+// Issue two UPDATE statements thru executeUpdate()
+                stmt.executeUpdate("update books set qty = qty - 99 where id = 1001");
+                stmt.executeUpdate("update books set qty = qty - 99 where id = 1002");
+                conn.rollback();   // Discard all changes since the last commit
+
+                rset = stmt.executeQuery("select id, qty from books where id in (1001, 1002)");
+                System.out.println("-- After UPDATE and Rollback --");
+                while(rset.next()) {
+                    System.out.println(rset.getInt("id") + ", " + rset.getInt("qty"));
+                }
+                conn.commit();     // Commit SELECT
 
             } catch(SQLException ex) {
                 System.out.println("-- Rolling back changes --");
