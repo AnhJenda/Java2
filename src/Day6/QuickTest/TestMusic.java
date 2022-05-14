@@ -26,11 +26,9 @@ public class TestMusic {
                     Integer insertSongID = inputInsert.nextInt();
                     inputInsert.nextLine();
                     System.out.println("Nhap ten bai hat: ");
-                    String insertSong = inputInsert.next();
-                    inputInsert.nextLine();
+                    String insertSong = inputInsert.nextLine();
                     System.out.println("Nhap ten tac gia: ");
-                    String insertAuthor = inputInsert.next();
-                    inputInsert.nextLine();
+                    String insertAuthor = inputInsert.nextLine();
                     System.out.println("Nhap nam phat hanh: ");
                     Integer insertReleaseYear = inputInsert.nextInt();
 
@@ -54,11 +52,9 @@ public class TestMusic {
                     Integer newSongID = inputUpdate.nextInt();
                     inputUpdate.nextLine();
                     System.out.println("Nhap ten moi: ");
-                    String newSongName = inputUpdate.next();
-                    inputUpdate.nextLine();
+                    String newSongName = inputUpdate.nextLine();
                     System.out.println("Nhap ten tac gia moi: ");
-                    String newAuthor = inputUpdate.next();
-                    inputUpdate.nextLine();
+                    String newAuthor = inputUpdate.nextLine();
                     System.out.println("Nhap nam phat hanh moi: ");
                     Integer newReleaseYear = inputUpdate.nextInt();
 
@@ -88,7 +84,7 @@ public class TestMusic {
                     System.out.println("Nhap ten bai hat ban muon tim");
                     String searchSongName = inputSearch.next();
 
-                    String searchStm = "select * from music where songName like '%'?'%'";
+                    String searchStm = "select * from music where songName = ?";
                     PreparedStatement prpstmSearch = conn.prepareStatement(searchStm);
                     prpstmSearch.setString(1, searchSongName);
                     ResultSet rset = prpstmSearch.executeQuery();
@@ -102,6 +98,7 @@ public class TestMusic {
                         System.out.printf("%-30s",
                                 "(" + rsetMD.getColumnClassName(i) + ")");
                     }
+                    System.out.println();
                     while (rset.next()) {
                         for (int i = 1; i <= numColumns; ++i) {
                             // getString() can be used for all column types
