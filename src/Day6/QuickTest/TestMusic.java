@@ -73,7 +73,7 @@ public class TestMusic {
                     System.out.println("Nhap ten bai hat ban muon xoa: ");
                     String deleteSongName = inputDelete.next();
 
-                    String deleteStm = "delete * from music where songID = ?";
+                    String deleteStm = "delete from music where songID = ?";
                     PreparedStatement prpstmDelete = conn.prepareStatement(deleteStm);
                     prpstmDelete.setString(1, deleteSongName);
                     prpstmDelete.executeUpdate();
@@ -82,7 +82,7 @@ public class TestMusic {
                     System.out.println("Ban da lua chon muc tim kiem!");
                     Scanner inputSearch = new Scanner(System.in);
                     System.out.println("Nhap ten bai hat ban muon tim");
-                    String searchSongName = inputSearch.next();
+                    String searchSongName = inputSearch.nextLine();
 
                     String searchStm = "select * from music where songName = ?";
                     PreparedStatement prpstmSearch = conn.prepareStatement(searchStm);
