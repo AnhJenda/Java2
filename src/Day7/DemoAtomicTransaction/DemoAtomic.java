@@ -34,7 +34,7 @@ public class DemoAtomic {
                 prpStmUpdate.setString(2, "Bai hat 4");
                 prpStmUpdate.setInt(3, 2);
                 prpStmUpdate.executeUpdate();
-                prpStmDelete.setInt(1, 1);
+                prpStmDelete.setInt(1, 12);
                 prpStmDelete.executeUpdate();
                 conn.commit();
             }catch (SQLException e){

@@ -5,13 +5,15 @@ package Day7.DemoAtomicTransaction.BatchP2;
     Date   : 5/16/2022
     Project: Java2
 */
+import org.jetbrains.annotations.NotNull;
+
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 public class TestBatchP2 {
-    public static List<person> personList() {
+    public static @NotNull List<person> personList() {
         List<person> listPerson = new ArrayList<person>();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1000; i++) {
             listPerson.add(new person(i, "person" + i, "address" + i));
         }
         return listPerson;
@@ -26,7 +28,7 @@ public class TestBatchP2 {
                 "");
         /*
         System.currentTimeMillis() thường được sử dụng để đo khoảng thời gian làm một việc gì đó
-         bằng cách gọi method này trước khi bắt đầu công việc, và sau khi hoàn thành công việc.
+         bằng cách gọi method này trước khi bắt đầu công việc, và sau khi hoàn thành công việc. đơn vị là ms.
          */
         long startTime = System.currentTimeMillis();
         List<person> listPerson = personList();

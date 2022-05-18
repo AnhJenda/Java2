@@ -17,7 +17,7 @@ public class DemoBatch {
             String insertStm = "insert into music(songID, songName) values (?, ?)";
             PreparedStatement prpstmInsert = conn.prepareStatement(insertStm);
 
-            prpstmInsert.setInt(1, 2);
+            prpstmInsert.setInt(1, 12);
             prpstmInsert.setString(2, "bai hat 8");
             prpstmInsert.executeUpdate();
             prpstmInsert.setInt(1, 10);
