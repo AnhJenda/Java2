@@ -22,7 +22,7 @@ public class MultipleThreads extends Thread {
             } catch (InterruptedException e) {
                 break;
             }
-        }// End of while loop
+        }
     }
 
     public static void main(String args[]) {
