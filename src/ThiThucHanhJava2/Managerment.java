@@ -48,6 +48,15 @@ public class Managerment {
             System.out.println("Duplicate student ID, add failed!");
         }
     }
+    public void displayCollectionStudent() {
+        System.out.println("You choosed display student records in collection.");
+        System.out.printf("%-30s%-30s%-30s%-30s","ID","Name","Address","Phone");
+        System.out.println();
+        for (Student student: studentList) {
+            System.out.printf("%-30s%-30s%-30s%-30s",student.getStudentID(),student.getName(),student.getAddress(),student.getPhone());
+            System.out.println();
+        }
+    }
 }
 
 

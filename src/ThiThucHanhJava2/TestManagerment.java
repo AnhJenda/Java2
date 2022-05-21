@@ -23,9 +23,10 @@ public class TestManagerment {
                 while (exitBtn != 4){
                     Scanner in = new Scanner(System.in);
                     System.out.println("* Enter 1 to add student record.");
-                    System.out.println("* Enter 2 to display student record.");
+                    System.out.println("* Enter 2 to display student records in collection.");
                     System.out.println("* Enter 3 to save student record to database.");
                     System.out.println("* Enter 4 to exit.");
+                    System.out.println("* Enter 5 to display student records in database."); // cái này là lúc đầu em chưa hiểu đề nên làm thêm ạ
                     System.out.println("Enter your choice: ");
                     int choice = in.nextInt();
                     switch (choice) {
@@ -33,7 +34,29 @@ public class TestManagerment {
                             managerment.addStudent();
                             break;
                         case 2:
-                            System.out.println("You choosed displaying student records!");
+                            managerment.displayCollectionStudent();
+                            break;
+                        case 3:
+                            System.out.println("You choosed saving the student records!");
+                            List<Student> listStudent = managerment.getStudentList();
+                            String saveStm = "INSERT INTO student(studentID, name, address, phone) VALUES (?, ?, ?,?);";
+                            PreparedStatement pstmt = conn.prepareStatement(saveStm);
+                            int count = 0;
+                            for (Student student: listStudent) {
+                                pstmt.setInt(1, student.getStudentID());
+                                pstmt.setString(2, student.getName());
+                                pstmt.setString(3, student.getAddress());
+                                pstmt.setString(4, student.getPhone());
+                                pstmt.executeUpdate();
+                                ++count;
+                            }
+                            System.out.println(count + "records saved!");
+                            break;
+                        case 4:
+                            exitBtn = 4;
+                            break;
+                        case 5:
+                            System.out.println("You choosed displaying student records saved in database!");
 
                             String displayStm = "Select * from student";
                             PreparedStatement prpStmSelect = conn.prepareStatement(displayStm);
@@ -55,25 +78,6 @@ public class TestManagerment {
                                 }
                                 System.out.println();
                             }
-                            break;
-                        case 3:
-                            System.out.println("You choosed saving the student records!");
-                            List<Student> listStudent = managerment.getStudentList();
-                            String saveStm = "INSERT INTO student(studentID, name, address, phone) VALUES (?, ?, ?,?);";
-                            PreparedStatement pstmt = conn.prepareStatement(saveStm);
-                            int count = 0;
-                            for (Student student: listStudent) {
-                                pstmt.setInt(1, student.getStudentID());
-                                pstmt.setString(2, student.getName());
-                                pstmt.setString(3, student.getAddress());
-                                pstmt.setString(4, student.getPhone());
-                                pstmt.executeUpdate();
-                                ++count;
-                            }
-                            System.out.println(count + "records saved!");
-                            break;
-                        case 4:
-                            exitBtn = 4;
                             break;
                     }
                 }
