@@ -1,1 +1,1 @@
-CREATE DATABASE thithuchanhjava2;
+CREATE DATABASE thithuchanhjava2

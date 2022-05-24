@@ -1,4 +1,4 @@
-package ProjectJava2;
+package projectJava2;
 
 /*
     @author: Dinh Quang Anh
@@ -16,6 +16,7 @@ public class Student {
         this.phone = phone;
     }
     // getter-setter
+
     public int getStudentID() {
         return studentID;
     }
